@@ -21,12 +21,12 @@ describe('[GET] /hobbits', () => {
         expect(res.body).toHaveLength(4)
     })
 })
+
 describe('[POST] /hobbits', () => {
-    const bilbo = { name: 'bilbo' }
+    const bilbo = { name: 'bilbo'}
     test('adds a hobbit to the database', async () => {
         await request(server).post('/hobbits').send(bilbo)
-        const records = await db('hobbits')
-        expect(records).toHaveLength(5)
+        expect(await db('hobbits')).toHaveLength(5)
     })
     test('responds with the new hobbit', async () => {
        const res = await request(server).post('/hobbits').send(bilbo)
